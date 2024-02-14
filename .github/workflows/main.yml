@@ -1,4 +1,4 @@
-name: Auto test L10 solution
+name: L4 Testing Milestone
 on: push
 env:
   PG_DATABASE: wd-todo-test
