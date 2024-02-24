@@ -67,9 +67,6 @@ jobs:
           npm install cypress cypress-json-results
           npx cypress run --env BASE_URL="http://localhost:3000/"
 
-  notify:
-    runs-on: ubuntu-latest
-    steps:
       - name: Notify on failure
         if: failure()
         uses: nobrayner/discord-webhook@v1
