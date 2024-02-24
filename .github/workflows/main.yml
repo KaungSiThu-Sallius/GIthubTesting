@@ -51,7 +51,7 @@ jobs:
           annotations: true
 
       - name: Run unit tests
-        run: npm test
+        run: npm tes
 
       - name: Run the app
         id: run-app
