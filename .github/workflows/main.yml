@@ -67,7 +67,10 @@ jobs:
 
       - name: Notify on failure
         if: failure()
-        uses: nobrayner/discord-webhook@v1
+        uses: appleboy/discord-action@master
         with:
-          github-token: ${{ secrets.MY_GITHUB_TOKEN }}
-          discord-webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          color: "ff0000"
+          title: "Pipeline Failed"
+          description: "The pipeline failed. Check the logs for details."
