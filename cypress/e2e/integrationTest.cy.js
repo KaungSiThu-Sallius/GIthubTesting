@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 describe('Authentication', () => {
     it('Should not create empty sign up form fields', () => {
-        cy.visit('http://localhost:3000/signUp');
+        cy.visit('/signUp');
         cy.get('form').submit();
         cy.contains('Internal Server Error').should('exist');
     });
@@ -9,7 +9,7 @@ describe('Authentication', () => {
 
 
     it('Should not log in with incorrect credentials', () => {
-        cy.visit('http://localhost:3000/login');
+        cy.visit('/login');
 
         cy.get('input[name="email"]').type('invalid@gmail.com');
         cy.get('input[name="password"]').type('password');
@@ -21,7 +21,7 @@ describe('Authentication', () => {
     });
 
     it('Should log in with correct credentials', () => {
-        cy.visit('http://localhost:3000/login');
+        cy.visit('/login');
 
         cy.get('input[name="email"]').type('kaung@gmail.com');
         cy.get('input[name="password"]').type('password');
@@ -32,7 +32,7 @@ describe('Authentication', () => {
 
     it('should have an input field title', () => {
 
-        cy.visit('http://localhost:3000/login');
+        cy.visit('/login');
 
         cy.get('input[name="email"]').type('kaung@gmail.com');
         cy.get('input[name="password"]').type('password');
@@ -40,14 +40,14 @@ describe('Authentication', () => {
         cy.intercept('POST', '/login').as('loginRequest');
 
         cy.get('form').submit();
-        cy.visit('http://localhost:3000/todos');
+        cy.visit('/todos');
         cy.get('input[name="title"]').should('exist');
     });
 
 
     it('should have an input field dueDate', () => {
 
-        cy.visit('http://localhost:3000/login');
+        cy.visit('/login');
 
         cy.get('input[name="email"]').type('kaung@gmail.com');
         cy.get('input[name="password"]').type('password');
@@ -55,13 +55,13 @@ describe('Authentication', () => {
         cy.intercept('POST', '/login').as('loginRequest');
 
         cy.get('form').submit();
-        cy.visit('http://localhost:3000/todos');
+        cy.visit('/todos');
         cy.get('input[name="dueDate"]').should('exist');
     });
 
     it('should contain a submit button', () => {
 
-        cy.visit('http://localhost:3000/login');
+        cy.visit('/login');
 
         cy.get('input[name="email"]').type('kaung@gmail.com');
         cy.get('input[name="password"]').type('password');
@@ -69,12 +69,12 @@ describe('Authentication', () => {
         cy.intercept('POST', '/login').as('loginRequest');
 
         cy.get('form').submit();
-        cy.visit('http://localhost:3000/todos');
+        cy.visit('/todos');
         cy.get('button[type="submit"]').should('exist');
     });
 
     it('should check if element with id "count-due-later" exists to show number of count', () => {
-        cy.visit('http://localhost:3000/login');
+        cy.visit('/login');
 
         cy.get('input[name="email"]').type('kaung@gmail.com');
         cy.get('input[name="password"]').type('password');
@@ -82,12 +82,12 @@ describe('Authentication', () => {
         cy.intercept('POST', '/login').as('loginRequest');
 
         cy.get('form').submit();
-        cy.visit('http://localhost:3000/todos');
+        cy.visit('/todos');
         cy.get('#count-due-later').should('exist');
     });
 
     it('should check if element with id "count-due-today" exists to show number of count', () => {
-        cy.visit('http://localhost:3000/login');
+        cy.visit('/login');
 
         cy.get('input[name="email"]').type('kaung@gmail.com');
         cy.get('input[name="password"]').type('password');
@@ -95,12 +95,12 @@ describe('Authentication', () => {
         cy.intercept('POST', '/login').as('loginRequest');
 
         cy.get('form').submit();
-        cy.visit('http://localhost:3000/todos');
+        cy.visit('/todos');
         cy.get('#count-due-today').should('exist');
     });
 
     it('should check if element with id "count-overdue" exists to show number of count', () => {
-        cy.visit('http://localhost:3000/login');
+        cy.visit('/login');
 
         cy.get('input[name="email"]').type('kaung@gmail.com');
         cy.get('input[name="password"]').type('password');
@@ -108,12 +108,12 @@ describe('Authentication', () => {
         cy.intercept('POST', '/login').as('loginRequest');
 
         cy.get('form').submit();
-        cy.visit('http://localhost:3000/todos');
+        cy.visit('/todos');
         cy.get('#count-overdue').should('exist');
     });
 
     // it('should not create todo item with empty title', () => {
-    //     cy.visit('http://localhost:3000/login');
+    //     cy.visit('/login');
 
     //     cy.get('input[name="email"]').type('kaung@gmail.com');
     //     cy.get('input[name="password"]').type('password');
@@ -121,7 +121,7 @@ describe('Authentication', () => {
     //     cy.intercept('POST', '/login').as('loginRequest');
     //     cy.get('form').submit();
 
-    //     cy.visit('http://localhost:3000/todos');
+    //     cy.visit('/todos');
 
     //     cy.get('meta[name="csrf-token"]').invoke('attr', 'content').then((csrfToken) => {
     //         cy.get('input[name="title"]').type('Push Up');
