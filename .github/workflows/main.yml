@@ -41,7 +41,7 @@ jobs:
         run: npm ci
 
       - name: Run ESLint
-        uses: actions/eslint@v3
+        uses: stefanoeb/eslint-action@1.0.2
 
       - name: Run unit tests
         run: npm test
