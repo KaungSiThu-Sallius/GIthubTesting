@@ -11,7 +11,7 @@ jobs:
       - name: ESLint
         uses: sibiraj-s/action-eslint@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # optional
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
           eslint-args: "--ignore-path=.gitignore --quiet"
           extensions: "js,jsx,ts,tsx"
           annotations: true
@@ -69,10 +69,6 @@ jobs:
 
   notify:
     runs-on: ubuntu-latest
-    needs:
-      - lint
-      - build
-      - test
     steps:
       - name: Notify on failure
         if: failure()
