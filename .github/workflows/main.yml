@@ -72,4 +72,4 @@ jobs:
         uses: nobrayner/discord-webhook@v1
         with:
           github-token: ${{ secrets.MY_GITHUB_TOKEN }}
-          discord-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          discord-webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
