@@ -19,24 +19,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:11.7
-        env:
-          POSTGRES_USER: ${{ secrets.DB_USERNAME }}
-          # this environment variable is needed to connect the server with the postgres database which is database username
-          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          # this environment variable is needed to connect the server with the postgres database which is database password
-          # POSTGRES_USER: postgres
-          # POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: wd-todo-test
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -90,7 +72,6 @@ jobs:
       #     npm install cypress cypress-json-results
       #     npx cypress run --env BASE_URL="http://localhost:3000/"
       - name: Notify on failure
-        if: failure()
         uses: nobrayner/discord-webhook@v1
         with:
           github-token: ${{ secrets.MY_GITHUB_TOKEN }}
