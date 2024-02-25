@@ -48,9 +48,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
+      - uses: sibiraj-s/action-eslint@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # optional
+          eslint-args: "--ignore-path=.gitignore --quiet"
+          extensions: "js,jsx,ts,tsx"
+          annotations: true
+
       - name: Run unit tests
         run: npm test
 
@@ -64,17 +68,7 @@ jobs:
           PORT=3000 npm start &
           sleep 5
 
-      # - name: Run integration tests
-      #   run: |
-      #     npm install cypress cypress-json-results
-      #     npx cypress run --env BASE_URL="http://localhost:3000/"
-
-  notify:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Notify on failure
-        if: failure()
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+      - name: Run integration tests
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"Pipeline failed! Check the logs for details."}' -v $DISCORD_WEBHOOK_URL
+          npm install cypress cypress-json-results
+          npx cypress run --env BASE_URL="http://localhost:3000/"
