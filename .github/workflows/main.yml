@@ -41,6 +41,8 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
+      # Performs a clean installation of all dependencies in the `package.json` file
+      # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Install dependencies
         run: npm ci
 
@@ -68,13 +70,9 @@ jobs:
       #     npm install cypress cypress-json-results
       #     npx cypress run --env BASE_URL="http://localhost:3000/"
 
-      # - name: Notify on failure
-      #   if: failure()
-      #   uses: appleboy/discord-action@master
-      #   with:
-      #     webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
-      #     # this environment variable is needed to connect the github action with the discord to report the error
-      #     webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
-      #     color: "ff0000"
-      #     title: "Pipeline Failed"
-      #     description: "The pipeline failed. Check the logs for details."
+      - name: Notify on failure
+        if: failure()
+        uses: nobrayner/discord-webhook@v1
+        with:
+          github-token: ${{ secrets.MY_GITHUB_TOKEN }}
+          discord-webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
