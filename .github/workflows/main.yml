@@ -12,6 +12,7 @@ jobs:
         uses: sibiraj-s/action-eslint@v3
         with:
           token: ${{ secrets.MY_GITHUB_TOKEN }}
+          # this environment variable is needed for ESLint github action which is github token I created in githup developer section
           eslint-args: "--ignore-path=.gitignore --quiet"
           extensions: "js,jsx,ts,tsx"
           annotations: true
@@ -23,7 +24,9 @@ jobs:
         image: postgres:11.7
         env:
           POSTGRES_USER: ${{ secrets.DB_USERNAME }}
+          # this environment variable is needed to connect the server with the postgres database which is database username
           POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          # this environment variable is needed to connect the server with the postgres database which is database password
           # POSTGRES_USER: postgres
           # POSTGRES_PASSWORD: postgres
           POSTGRES_DB: wd-todo-test
@@ -70,6 +73,7 @@ jobs:
         uses: appleboy/discord-action@master
         with:
           webhook_id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          # this environment variable is needed to connect the github action with the discord to report the error
           webhook_token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
           color: "ff0000"
           title: "Pipeline Failed"
